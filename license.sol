@@ -21,9 +21,9 @@ contract licenseValidation{
     function getHash(uint _id) view public returns (string memory _hashvalue){
         return id_to_contact[_id].hashvalue;
     }
-   function getContact(uint _id) view public returns (bool _trialpass,bool _writtenpass,bool _pass) {
+   function getContact(uint _id) view public returns (bool _trialpass,bool _writtenpass,bool _pass,string memory _hashvalue) {
        require(_id < id);
-        return (id_to_contact[_id].trialpass,id_to_contact[_id].writtenpass,id_to_contact[_id].pass);
+        return (id_to_contact[_id].trialpass,id_to_contact[_id].writtenpass,id_to_contact[_id].pass,id_to_contact[_id].hashvalue);
     }
     function set_update(bool _trialpass,bool _writtenpass,uint _id)public{
 

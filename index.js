@@ -8,7 +8,7 @@ const ethers=require('ethers');
 var bytecode = fs.readFileSync('license_sol_licenseValidation.bin').toString();
 var abi = JSON.parse(fs.readFileSync('license_sol_licenseValidation.abi').toString());
 var provider = new ethers.providers.JsonRpcProvider();
-var address='0xdee96F1BBBAC9403251e9d4d288e803C6394a48D';
+var address='0xfCCc40C41acc66Fd88587d7fcd9ac82Eb682835Dy';
 privateKey='0x95704cff0bbdb1259b4b45af3ff474185b625c31fb47c5fcb47bfe482319e12c';
 var wallet = new ethers.Wallet(privateKey, provider);
 var contract = new ethers.Contract(address, abi, wallet);
@@ -34,8 +34,9 @@ console.log(contract)});//the contract is being deployed
 // provider.listAccounts().then(result => console.log(result));
 app.get('/addApplicant',(req,res)=>{
     // //Reading file from computer
-
-    let testFile = fs.readFileSync("file.json");
+     var applicant={"fname":req.body.fname,"lname":req.body.lname,"number":req.body.number,"gender":req.body.gender};
+     fs.writeFileSync('./../test-ipfs/file.json',JSON.stringify(applicant));
+    let testFile = fs.readFileSync("./../test-ipfs/file.json");
     // //Creating buffer for ipfs function to add file to the system
     let testBuffer = new Buffer(testFile);
 
@@ -93,7 +94,7 @@ app.get('/addApplicant',(req,res)=>{
 app.get('/getfile', function(req, res) {
 
     //This hash is returned hash of addFile router.
-    const validCID = 'QmWdw8u3w4BqsZJ9ktw8CtBKEUySAQLQnfKiTxLRsi8KjC'
+    const validCID = 'QmNz2dohwXCy44AyaDcj8NiQbFmvWsf1Fp8eoZqKNyuSJY'
 
     ipfs.files.get(validCID, function (err, files) {
         console.log(files);
